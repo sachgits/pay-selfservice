@@ -34,10 +34,13 @@
             "name": "transactions-details:read"
           },
           {
-            "name": "refunds_create"
+            "name": "refunds:create"
           },
           {
-            "name": "refunds:create"
+            "name": "merchant-details:read"
+          },
+          {
+            "name": "merchant-details:update"
           }
         ],
         "sections": {
