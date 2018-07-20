@@ -6,7 +6,7 @@ const _ = require('lodash')
 // Custom dependencies
 let User = require('../../app/models/User.class')
 let pactBase = require('./pact_base')
-let pactUsers = pactBase({array: ['permissions', 'gateway_account_ids', 'service_ids']})
+let pactUsers = pactBase({array: ['permissions', 'gateway_account_ids', 'service_ids', 'service_roles', 'services', '_links']})
 
 function validPassword () {
   return 'G0VUkPay2017Rocks'
@@ -320,6 +320,406 @@ module.exports = {
     }
 
     return pactUsers.withPactified(request)
+  },
+
+  validPasswordAuthenticateRequest: (opts = {}) => {
+
+    const usernameGenerate = opts.username || 'validuser'
+    const usernameMatcher = opts.usernameMatcher || 'validuser'
+
+    const passwordGenerate = opts.password || 'validpassword'
+    const passwordMatcher = opts.passwordMatcher || 'validpassword'
+
+    return {
+      username: pactUsers.pactifyMatch(usernameGenerate, usernameMatcher),
+      password: pactUsers.pactifyMatch(passwordGenerate, passwordMatcher)
+    }
+
+  },
+
+  invalidPasswordAuthenticateRequest: (opts = {}) => {
+
+    const usernameGenerate = opts.username || 'validuser'
+    const usernameMatcher = opts.usernameMatcher || 'validuser'
+
+    const passwordGenerate = opts.password || 'invalidpassword'
+    const passwordMatcher = opts.passwordMatcher || 'invalidpassword'
+
+    return {
+      username: pactUsers.pactifyMatch(usernameGenerate, usernameMatcher),
+      password: pactUsers.pactifyMatch(passwordGenerate, passwordMatcher)
+    }
+
+  },
+
+  validPasswordAuthenticateResponse: (opts = {}) => {
+    let response =
+      {
+        external_id: opts.external_id || '09283568e105442da3928d1fa99fb0eb',
+        username: opts.username || 'nbGscObDSKxf31CjF0uzGRwnOaNyztKw@example.com',
+        email: opts.email || 'nbGscObDSKxf31CjF0uzGRwnOaNyztKw@example.com',
+        gateway_account_ids: opts.gateway_account_ids || [],
+        otp_key: opts.otp_key || 'nlcj80ivce10tkjdbnaicf6brk',
+        telephone_number: opts.telephone_number || '9797219',
+        service_roles: opts.service_roles || [
+          {
+            service: {
+              id: 857,
+              external_id: '0ab3525259894209bbc8d2a5b0538fc0',
+              name: 'System Generated',
+              gateway_account_ids: [
+                '923'
+              ],
+              _links: []
+            },
+            role: {
+              name: 'admin',
+              description: 'Administrator',
+              permissions: [
+                {
+                  name: 'users-service:read',
+                  description: 'Viewusersinservice'
+                },
+                {
+                  name: 'users-service:create',
+                  description: 'Createuserinthisservice'
+                },
+                {
+                  name: 'tokens-active:read',
+                  description: 'Viewactivekeys'
+                },
+                {
+                  name: 'tokens-revoked:read',
+                  description: 'Viewrevokedkeys'
+                },
+                {
+                  name: 'tokens:create',
+                  description: 'Generatekey'
+                },
+                {
+                  name: 'tokens:update',
+                  description: 'Generatekey'
+                },
+                {
+                  name: 'tokens:delete',
+                  description: 'Revokekey'
+                },
+                {
+                  name: 'transactions:read',
+                  description: 'Viewtransactionslist'
+                },
+                {
+                  name: 'transactions-by-date:read',
+                  description: 'Searchtransactionsbydate'
+                },
+                {
+                  name: 'transactions-by-fields:read',
+                  description: 'Searchtransactionsbypaymentfields'
+                },
+                {
+                  name: 'transactions-download:read',
+                  description: 'Downloadtransactions'
+                },
+                {
+                  name: 'transactions-details:read',
+                  description: 'Viewtransactiondetails'
+                },
+                {
+                  name: 'transactions-events:read',
+                  description: 'Viewtransactionevents'
+                },
+                {
+                  name: 'refunds:create',
+                  description: 'Issuerefund'
+                },
+                {
+                  name: 'transactions-amount:read',
+                  description: 'Viewtransactionamounts'
+                },
+                {
+                  name: 'transactions-description:read',
+                  description: 'Viewtransactiondescription'
+                },
+                {
+                  name: 'transactions-email:read',
+                  description: 'Viewtransactionemail'
+                },
+                {
+                  name: 'transactions-card-type:read',
+                  description: 'Viewtransactioncardtype'
+                },
+                {
+                  name: 'gateway-credentials:read',
+                  description: 'Viewgatewayaccountcredentials'
+                },
+                {
+                  name: 'gateway-credentials:update',
+                  description: 'Editgatewayaccountcredentials'
+                },
+                {
+                  name: 'service-name:read',
+                  description: 'Viewservicename'
+                },
+                {
+                  name: 'service-name:update',
+                  description: 'Editservicename'
+                },
+                {
+                  name: 'payment-types:read',
+                  description: 'Viewpaymenttypes'
+                },
+                {
+                  name: 'payment-types:update',
+                  description: 'Editpaymenttypes'
+                },
+                {
+                  name: 'email-notification-template:read',
+                  description: 'Viewemailnotificationstemplate'
+                },
+                {
+                  name: 'email-notification-paragraph:update',
+                  description: 'Editemailnotificationsparagraph'
+                },
+                {
+                  name: 'email-notification-toggle:update',
+                  description: 'Turnemailnotificationson/off'
+                },
+                {
+                  name: 'tokens:read',
+                  description: 'View keys'
+                },
+                {
+                  name: 'toggle-3ds:read',
+                  description: 'View 3D Secure setting'
+                },
+                {
+                  name: 'toggle-3ds:update',
+                  description: 'Edit 3D Secure setting'
+                },
+                {
+                  name: 'users-service:delete',
+                  description: 'Remove user from a service'
+                },
+                {
+                  name: 'merchant-details:read',
+                  description: 'View Merchant Details setting'
+                },
+                {
+                  name: 'merchant-details:update',
+                  description: 'Edit Merchant Details setting'
+                }
+              ]
+            }
+          }
+        ],
+        features: opts.features || null,
+        second_factor: opts.second_factor || 'SMS',
+        provisional_otp_key: opts.provisional_otp_key || null,
+        provisional_otp_key_created_at: opts.provisional_otp_key_created_at || null,
+        services: opts.services || [{
+          id: 857,
+          external_id: '0ab3525259894209bbc8d2a5b0538fc0',
+          name: 'System Generated',
+          gateway_account_ids: [
+            '923'
+          ],
+          _links: []
+        }],
+        disabled: opts.disabled || false,
+        login_counter: opts.login_counter || 0,
+        session_version: opts.session_version || 0,
+        service_ids: opts.service_ids || ['857'],
+        _links: opts._links || [{
+          rel: 'self',
+          method: 'GET',
+          href: 'http://localhost:8080/v1/api/users/09283568e105442da3928d1fa99fb0eb'
+        }],
+        role: opts.role || {
+          name: 'admin',
+          description:
+            'Administrator',
+          permissions:
+            [
+              {
+                name: 'users-service:read',
+                description: 'Viewusersinservice'
+              },
+              {
+                name: 'users-service:create',
+                description: 'Createuserinthisservice'
+              },
+              {
+                name: 'tokens-active:read',
+                description: 'Viewactivekeys'
+              },
+              {
+                name: 'tokens-revoked:read',
+                description: 'Viewrevokedkeys'
+              },
+              {
+                name: 'tokens:create',
+                description: 'Generatekey'
+              },
+              {
+                name: 'tokens:update',
+                description: 'Generatekey'
+              },
+              {
+                name: 'tokens:delete',
+                description: 'Revokekey'
+              },
+              {
+                name: 'transactions:read',
+                description: 'Viewtransactionslist'
+              },
+              {
+                name: 'transactions-by-date:read',
+                description: 'Searchtransactionsbydate'
+              },
+              {
+                name: 'transactions-by-fields:read',
+                description: 'Searchtransactionsbypaymentfields'
+              },
+              {
+                name: 'transactions-download:read',
+                description: 'Downloadtransactions'
+              },
+              {
+                name: 'transactions-details:read',
+                description: 'Viewtransactiondetails'
+              },
+              {
+                name: 'transactions-events:read',
+                description: 'Viewtransactionevents'
+              },
+              {
+                name: 'refunds:create',
+                description: 'Issuerefund'
+              },
+              {
+                name: 'transactions-amount:read',
+                description: 'Viewtransactionamounts'
+              },
+              {
+                name: 'transactions-description:read',
+                description: 'Viewtransactiondescription'
+              },
+              {
+                name: 'transactions-email:read',
+                description: 'Viewtransactionemail'
+              },
+              {
+                name: 'transactions-card-type:read',
+                description: 'Viewtransactioncardtype'
+              },
+              {
+                name: 'gateway-credentials:read',
+                description: 'Viewgatewayaccountcredentials'
+              },
+              {
+                name: 'gateway-credentials:update',
+                description: 'Editgatewayaccountcredentials'
+              },
+              {
+                name: 'service-name:read',
+                description: 'Viewservicename'
+              },
+              {
+                name: 'service-name:update',
+                description: 'Editservicename'
+              },
+              {
+                name: 'payment-types:read',
+                description: 'Viewpaymenttypes'
+              },
+              {
+                name: 'payment-types:update',
+                description: 'Editpaymenttypes'
+              },
+              {
+                name: 'email-notification-template:read',
+                description: 'Viewemailnotificationstemplate'
+              },
+              {
+                name: 'email-notification-paragraph:update',
+                description: 'Editemailnotificationsparagraph'
+              },
+              {
+                name: 'email-notification-toggle:update',
+                description: 'Turnemailnotificationson/off'
+              },
+              {
+                name: 'tokens:read',
+                description: 'View keys'
+              },
+              {
+                name: 'toggle-3ds:read',
+                description: 'View 3D Secure setting'
+              },
+              {
+                name: 'toggle-3ds:update',
+                description: 'Edit 3D Secure setting'
+              },
+              {
+                name: 'users-service:delete',
+                description: 'Remove user from a service'
+              },
+              {
+                name: 'merchant-details:read',
+                description: 'View Merchant Details setting'
+              },
+              {
+                name: 'merchant-details:update',
+                description: 'Edit Merchant Details setting'
+              }
+            ]
+        }
+        ,
+        permissions: opts.permissions || [
+          'users-service:read',
+          'users-service:create',
+          'tokens-active:read',
+          'tokens-revoked:read',
+          'tokens:create',
+          'tokens:update',
+          'tokens:delete',
+          'transactions:read',
+          'transactions-by-date:read',
+          'transactions-by-fields:read',
+          'transactions-download:read',
+          'transactions-details:read',
+          'transactions-events:read',
+          'refunds:create',
+          'transactions-amount:read',
+          'transactions-description:read',
+          'transactions-email:read',
+          'transactions-card-type:read',
+          'gateway-credentials:read',
+          'gateway-credentials:update',
+          'service-name:read',
+          'service-name:update',
+          'payment-types:read',
+          'payment-types:update',
+          'email-notification-template:read',
+          'email-notification-paragraph:update',
+          'email-notification-toggle:update',
+          'tokens:read',
+          'toggle-3ds:read',
+          'toggle-3ds:update',
+          'users-service:delete',
+          'merchant-details:read',
+          'merchant-details:update'
+        ]
+      }
+    return pactUsers.withPactified(response)
+  },
+
+  invalidPasswordAuthenticateResponse: () => {
+    let response = {
+      errors: ['invalid username and/or password']
+    }
+
+    return pactUsers.withPactified(response)
   },
 
   validForgottenPasswordCreateRequest: (username) => {

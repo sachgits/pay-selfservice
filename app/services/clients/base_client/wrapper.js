@@ -43,6 +43,7 @@ module.exports = function (method, verb) {
       if (err) {
         reject(err)
       } else if (response && SUCCESS_CODES.includes(response.statusCode)) {
+
         // transform our output if the appropriate function was passed.
         body = transform ? transform(body) : body
         resolve(body)
